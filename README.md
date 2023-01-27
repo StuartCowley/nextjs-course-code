@@ -34,8 +34,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Topics covered so far
-- /pages folder structure for routing
+- `/pages` folder structure for routing
 - Dynamic routing and navigation with useRouter
-- Internal navigation with Link from next/link
-- Using _app.js to add a global menu
+- Internal navigation with `Link` from next/link
+- Using `_app.js` to add a global menu
 - Using CSS modules for styling
+- Using `getStaticProps` so data is included in initial request to server
