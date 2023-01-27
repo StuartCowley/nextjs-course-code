@@ -40,3 +40,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Using `_app.js` to add a global menu
 - Using CSS modules for styling
 - Using `getStaticProps` so data is included in initial request to server
+- Using `getStaticProps` on pages with dynamic routing, with context.params.<routeId>, plus `getStaticPaths` and fallback
