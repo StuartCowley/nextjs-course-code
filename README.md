@@ -45,3 +45,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Installing mongoDB driver, creating a mongoDB cluster for backend
 - Setting up a POST api route to create a collection and add documents
 - Adding data to mongo via `fetch` api
+- Fetching data from api in `getStaticProps`
+- Filtering a collection for a single document using `findOne` method
+- Programatically creating staticPaths using api IDs
+- Using `ObjectId` to handle mongos `_id` object

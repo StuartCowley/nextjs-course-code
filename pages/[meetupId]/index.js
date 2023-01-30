@@ -1,17 +1,18 @@
+import { MongoClient, ObjectId } from "mongodb";
 import MeetupDetails from "../../components/meetups/MeetupDetails";
 
-const MeetupDetailsPage = () => {
+const MeetupDetailsPage = (props) => {
   return (
     <MeetupDetails
-      image="https://cdn.britannica.com/35/155335-050-D0C61BB7/Notre-Dame-de-Paris-France.jpg"
-      title="A first meetup"
-      address="An address, toBeFilledOutLater drive"
-      description="The description"
+      image={props.meetupData.image}
+      title={props.meetupData.title}
+      address={props.meetupData.address}
+      description={props.meetupData.description}
     />
   );
 };
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
   // Needed for a page that uses getStaticProps AND has dynamic props
   // Define all valid paths for the server to generate content for
 
@@ -19,40 +20,51 @@ export function getStaticPaths() {
   // false ===  ALL valid routes. 404 shown for others
   // true  === Will attempt page when request comes in
 
+  const client = await MongoClient.connect(
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@atlascluster.c3dyrvm.mongodb.net/meetups?retryWrites=true&w=majority`
+  );
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+
+  const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
+
+  client.close();
+
   return {
     fallback: false,
-    paths: [
-      {
-        params: {
-          meetupId: "m1"
-        }
-      },
-      {
-        params: {
-          meetupId: "m2"
-        }
-      },
-    ]
-  }
+    paths: meetups.map((meetup) => ({
+      params: { meetupId: meetup._id.toString() },
+    })),
+  };
 }
 
-export function getStaticProps(context) {
-
+export async function getStaticProps(context) {
   const meetupId = context.params.meetupId;
-  console.log(meetupId);
 
   // fetch data for a single meetup
+  const client = await MongoClient.connect(
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@atlascluster.c3dyrvm.mongodb.net/meetups?retryWrites=true&w=majority`
+  );
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+
+  const selectedMeetup = await meetupsCollection.findOne({
+    _id: ObjectId(meetupId),
+  });
+
+  client.close();
+
   return {
     props: {
       meetupData: {
-        image: "https://cdn.britannica.com/35/155335-050-D0C61BB7/Notre-Dame-de-Paris-France.jpg",
-        id: "m1",
-        title: "A first meetup",
-        address: "An address, toBeFilledOutLater drive",
-        description: "The description"
-      }
-    }
-  }
+        id: selectedMeetup._id.toString(),
+        title: selectedMeetup.title,
+        address: selectedMeetup.address,
+        image: selectedMeetup.image,
+        description: selectedMeetup.description,
+      },
+    },
+  };
 }
 
 export default MeetupDetailsPage;
