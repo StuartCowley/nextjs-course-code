@@ -44,3 +44,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Using `getStaticProps` on pages with dynamic routing, with context.params.<routeId>, plus `getStaticPaths` and fallback
 - Installing mongoDB driver, creating a mongoDB cluster for backend
 - Setting up a POST api route to create a collection and add documents
+- Adding data to mongo via `fetch` api
