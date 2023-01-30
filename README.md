@@ -49,3 +49,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Filtering a collection for a single document using `findOne` method
 - Programatically creating staticPaths using api IDs
 - Using `ObjectId` to handle mongos `_id` object
+- Adding metadata to pages using `<Head>` from `next/head`
