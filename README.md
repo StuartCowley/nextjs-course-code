@@ -34,6 +34,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Topics covered so far
+
 - `/pages` folder structure for routing
 - Dynamic routing and navigation with useRouter
 - Internal navigation with `Link` from next/link
@@ -41,3 +42,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Using CSS modules for styling
 - Using `getStaticProps` so data is included in initial request to server
 - Using `getStaticProps` on pages with dynamic routing, with context.params.<routeId>, plus `getStaticPaths` and fallback
+- Installing mongoDB driver, creating a mongoDB cluster for backend
+- Setting up a POST api route to create a collection and add documents
